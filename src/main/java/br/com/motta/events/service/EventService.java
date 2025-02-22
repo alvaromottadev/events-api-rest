@@ -1,8 +1,10 @@
 package br.com.motta.events.service;
 
+import br.com.motta.events.exception.EventNullException;
 import br.com.motta.events.model.Event;
 import br.com.motta.events.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +15,15 @@ public class EventService {
     @Autowired
     private EventRepository repository;
 
-    public Event addNewEvent(Event event){
-        // gerando o preety name
+    public ResponseEntity<?> addNewEvent(Event event){
+        if (event.getTitle() == null || event.getLocation() == null || event.getPrice() == null
+                || event.getStartDate() == null || event.getEndDate() == null || event.getStartTime() == null || event.getEndTime() == null){
+            throw new EventNullException("Informações incompletas para criar um evento");
+        }
         event.setPrettyName(event.getTitle()
                 .toLowerCase()
                 .replaceAll(" ", "-"));
-        return repository.save(event);
+        return ResponseEntity.status(200).body(repository.save(event));
     }
 
     public List<Event> getAllEvents(){
