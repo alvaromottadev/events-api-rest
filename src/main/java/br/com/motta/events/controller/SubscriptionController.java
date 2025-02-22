@@ -42,7 +42,6 @@ public class SubscriptionController {
     @GetMapping("/subscription/{prettyName}/ranking")
     public ResponseEntity<?> generateRankingByEvent(@PathVariable String prettyName){
         try {
-            //Retorna uma lista da posição 0 até a 3
             return ResponseEntity.ok(service.getCompleteRanking(prettyName).subList(0, 3));
         } catch (EventNotFoundException e){
             return ResponseEntity.status(404).body(new ErrorMessage(e.getMessage()));
