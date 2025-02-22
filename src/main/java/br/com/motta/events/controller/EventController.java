@@ -1,11 +1,8 @@
 package br.com.motta.events.controller;
 
-import br.com.motta.events.dto.ErrorMessage;
-import br.com.motta.events.exception.InformationNullException;
 import br.com.motta.events.model.Event;
 import br.com.motta.events.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +15,8 @@ public class EventController {
     private EventService service;
 
     @PostMapping("/events")
-    public ResponseEntity<?> addNewEvent(@RequestBody Event newEvent){
-        try {
-            return service.addNewEvent(newEvent);
-        } catch (InformationNullException e){
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ErrorMessage(e.getMessage()));
-        }
+    public Event addNewEvent(@RequestBody Event newEvent){
+        return service.addNewEvent(newEvent);
     }
 
     @GetMapping("/events")

@@ -8,7 +8,6 @@ import br.com.motta.events.exception.UserIndicadorNotFoundException;
 import br.com.motta.events.model.User;
 import br.com.motta.events.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +32,7 @@ public class SubscriptionController {
             return ResponseEntity.status(404).body(new ErrorMessage(ex.getMessage()));
         } catch (SubscriptionConflictException ex){
             return ResponseEntity.status(409).body(new ErrorMessage(ex.getMessage()));
-        } catch (UserIndicadorNotFoundException ex) {
+        } catch (UserIndicadorNotFoundException ex){
             return ResponseEntity.status(404).body(new ErrorMessage(ex.getMessage()));
         }
         return ResponseEntity.badRequest().build();
