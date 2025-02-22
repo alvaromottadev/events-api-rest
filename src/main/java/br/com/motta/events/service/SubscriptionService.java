@@ -31,13 +31,11 @@ public class SubscriptionService {
     private SubscriptionRepository subscriptionRepository;
 
     public SubscriptionResponse createNewSubscription(String eventName, User user, Integer userId){
-        // Verifica se o evento existe, se não retorna uma exception
         Event evt = eventRepository.findByPrettyName(eventName);
         if (evt == null){
             throw new EventNotFoundException("Evento " + eventName + " não existe");
         }
 
-        //Verifica se o usuário indicador existe, se não retorna uma exception
         User indicador = null;
         if (userId != null) {
             indicador = userRepository.findById(userId).orElse(null);
@@ -46,25 +44,21 @@ public class SubscriptionService {
             }
         }
 
-        //Verifica se o usuário já está cadastrado no banco, se não, cadastra
         User userRec = userRepository.findByEmail(user.getEmail());
         if (userRec == null){
             userRec = userRepository.save(user);
         }
 
-        //Cria a subscription
         Subscription subs = new Subscription();
         subs.setEvent(evt);
         subs.setSubscriber(userRec);
         subs.setIndication(indicador);
 
-        //Verifica se o usuário já está cadastrado no evento, se já, retorna uma exception
         Subscription tmpSub = subscriptionRepository.findByEventAndSubscriber(evt, userRec);
         if (tmpSub != null){
             throw new SubscriptionConflictException("Já existe inscrição para o usuário " + userRec.getName() + " no evento " + evt.getTitle());
         }
 
-        //Salva a subscription
         Subscription res = subscriptionRepository.save(subs);
         return new SubscriptionResponse(res.getSubscriptionNumber(), "https://www.codecraft.com/subscription" + res.getEvent().getPrettyName() + "/" + res.getSubscriber().getId());
 
