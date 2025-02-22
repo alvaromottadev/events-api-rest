@@ -4,6 +4,7 @@ import br.com.motta.events.dto.SubscriptionRankingByUser;
 import br.com.motta.events.dto.SubscriptionRankingItem;
 import br.com.motta.events.dto.SubscriptionResponse;
 import br.com.motta.events.exception.EventNotFoundException;
+import br.com.motta.events.exception.InformationNullException;
 import br.com.motta.events.exception.SubscriptionConflictException;
 import br.com.motta.events.exception.UserIndicadorNotFoundException;
 import br.com.motta.events.model.Event;
@@ -31,6 +32,7 @@ public class SubscriptionService {
     private SubscriptionRepository subscriptionRepository;
 
     public SubscriptionResponse createNewSubscription(String eventName, User user, Integer userId){
+
         Event evt = eventRepository.findByPrettyName(eventName);
         if (evt == null){
             throw new EventNotFoundException("Evento " + eventName + " não existe");
