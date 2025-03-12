@@ -1,4 +1,3 @@
-
 # 📌 API Rest - Inscrições em Eventos.  
 **Este projeto foi desenvolvido com fins estudantis em conjunto com o evento NLW Connect** e tem como objetivo facilitar o processo de inscrições e indicações. Com ele, os participantes podem se cadastrar, indicar amigos e acompanhar um ranking de indicações, tornando a experiência de participação no evento ainda mais interativa e envolvente.
 
