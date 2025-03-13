@@ -57,7 +57,7 @@ cd events-api-rest
 
 4️⃣ **Crie as tabelas no banco de dados**  
 - Para criar as tabelas necessárias, execute o SQL disponível neste link:  
-  👉 [Query SQL para criação das tabelas](https://economic-jaborosa-ec9.notion.site/Query-SQL-API-Events-1a1268a7953a80488c22f2f2f1fca64f)  
+  👉 [Query SQL para criação das tabelas]([https://economic-jaborosa-ec9.notion.site/Query-SQL-API-Events-1a1268a7953a80488c22f2f2f1fca64f](https://sassy-ermine-3c7.notion.site/Query-SQL-Events-API-1b512b6797b3803facb7df56454900b7?pvs=4))  
 
 5️⃣ **Instale as dependências e rode o projeto:**  
 ```bash
